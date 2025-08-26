@@ -1,4 +1,5 @@
 import pytest
+import re
 from juros_composto import calcular_juros_compostos
 
 
@@ -11,7 +12,8 @@ def test_validar_capital():
     tempo = 3
 
     # Executando a função e esperando erro
-    with pytest.raises(ValueError, match="O capital investido deve ser um número (int ou float)."):
+    mensagem = "O capital investido deve ser um número (int ou float)."
+    with pytest.raises(ValueError, match=re.escape(mensagem)):
         calcular_juros_compostos(capital, taxa, tempo)
 # TAXA
 def test_validar_taxa():
@@ -21,7 +23,8 @@ def test_validar_taxa():
     tempo = 3
 
     #executando a função e esperando erro
-    with pytest.raises(ValueError, match="A taxa de juros deve ser um número (int ou float)."):
+    mensagem = "A taxa de juros deve ser um número (int ou float)."
+    with pytest.raises(ValueError,match=re.escape(mensagem)):
         calcular_juros_compostos(capital, taxa, tempo)
 
 # TEMPO
@@ -32,7 +35,8 @@ def test_validar_tempo():
     tempo = "oi"
 
     #executando a função e esperando o erro
-    with pytest.raises(ValueError, match="O tempo deve ser um número (int ou float)."):
+    mensagem = "O tempo deve ser um número (int ou float)."
+    with pytest.raises(ValueError, match=re.escape(mensagem)):
         calcular_juros_compostos(capital, taxa, tempo)
 
 # ------------------------------------VALIDANDO NEGATIVO ----------------------------------------------------
@@ -44,7 +48,8 @@ def test_validar_capital_negativo():
     tempo = 3
 
     # Executando a função e esperando erro
-    with pytest.raises(ValueError, match="O capital investido não pode ser negativo."):
+    mensagem = "O capital investido não pode ser negativo."
+    with pytest.raises(ValueError, match=re.escape(mensagem)):
         calcular_juros_compostos(capital, taxa, tempo)
 
 # TAXA
@@ -55,7 +60,8 @@ def test_validar_taxa_negativo():
     tempo = 3
 
     # Executando a função e esperando erro
-    with pytest.raises(ValueError, match="O capital investido não pode ser negativo."):
+    mensagem = "A taxa de juros não pode ser negativa."
+    with pytest.raises(ValueError, match=re.escape(mensagem)):
         calcular_juros_compostos(capital, taxa, tempo)
 
 # TEMPO
@@ -66,7 +72,8 @@ def test_validar_tempo_negativo():
     tempo = -3
 
     # executando a função e esperando o erro
-    with pytest.raies(ValueError, match="O tempo não pode ser negativo."):
+    mensagem = "O tempo não pode ser negativo."
+    with pytest.raises(ValueError, match=re.escape(mensagem)):
         calcular_juros_compostos(capital, taxa, tempo)
 
 
